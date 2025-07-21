@@ -18,7 +18,8 @@ module.exports = {
   },
   'globals': {
     'process': 'readonly',
-    'module': 'readonly'
+    'module': 'readonly',
+    '__dirname': 'readonly',
   },
   'settings': {
     'react': {
