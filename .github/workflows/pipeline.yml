@@ -12,6 +12,13 @@ env:
   SKIP_IN_COMMIT_MESSAGES: ${{ contains(join(github.event.commits.*.message), '#skip') }}
 
 jobs:
+  troubleshooting:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: | 
+          echo "${{ github.event.commits }}"
+          echo "${{ join(github.event.commits.*.message) }}"
+          echo "${{ env.SKIP_IN_COMMIT_MESSAGES }}"
   simple_deployment_pipeline:
     runs-on: ubuntu-22.04
     steps:
