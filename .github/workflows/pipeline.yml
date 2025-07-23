@@ -46,6 +46,11 @@ jobs:
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           content: "Success"
+          embed-title: "Success"
+          embed-url: https://full-stack-open-pokedex-azb0.onrender.com/
+          embed-description: "This was, indeed, a success"
+          embed-color: 65280
+          embed-footer-text: Pokedex Web App
       - name: Notify Discord about failed build
         uses: rjstone/discord-webhook-notify@v2
         if: ${{ failure() && github.event_name == 'push' }}
