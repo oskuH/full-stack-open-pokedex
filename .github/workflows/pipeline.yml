@@ -40,6 +40,24 @@ jobs:
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' && !env.SKIP_IN_COMMIT_MESSAGES }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+      - name: Notify Discord about successful deployment
+        uses: rjstone/discord-webhook-notify@c2597273488aeda841dd1e891321952b51f7996f
+        if: ${{ github.event_name == 'push' && !env.SKIP_IN_COMMIT_MESSAGES }}
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          username: Pokedex Web App Bot
+          text: A new version of Pokedex successfully deployed!
+          severity: info
+      - name: Notify Discord about failed build
+        uses: rjstone/discord-webhook-notify@c2597273488aeda841dd1e891321952b51f7996f
+        if: ${{ failure() }}
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          username: Pokedex Web App Bot
+          text: Build failed.
+          severity: error
+          details: commit ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} broke the build
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-22.04
@@ -49,7 +67,7 @@ jobs:
           fetch-depth: '0'
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' && !env.SKIP_IN_COMMIT_MESSAGES }}
-        uses: anothrNick/github-tag-action@1.73.0
+        uses: anothrNick/github-tag-action@e528bc2b9628971ce0e6f823f3052d1dcd9d512c
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
