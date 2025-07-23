@@ -41,12 +41,11 @@ jobs:
         if: ${{ github.event_name == 'push' && env.SKIP_IN_COMMIT_MESSAGES != 'true' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
       - name: Notify Discord about successful deployment
-        uses: rjstone/discord-webhook-notify@v2
-        if: ${{ github.event_name == 'push' }}
+        uses: tsickert/discord-webhook@v7.0.0
+        if: ${{ github.event_name == 'pull_request' }}
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          text: A new version of Pokedex successfully deployed
-          severity: info
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+          content: "Success"
       - name: Notify Discord about failed build
         uses: rjstone/discord-webhook-notify@v2
         if: ${{ failure() && github.event_name == 'push' }}
