@@ -1,4 +1,4 @@
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { beforeEach, describe, expect, test } = require('@playwright/test')
 
 describe('Pokedex', () => {
   beforeEach(async ({ page }) => {

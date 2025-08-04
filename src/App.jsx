@@ -1,10 +1,12 @@
 import React from 'react'
-import { Routes, Route, useMatch } from 'react-router-dom'
-import { useApi } from './useApi'
-import LoadingSpinner from './LoadingSpinner'
+import { Route, Routes, useMatch } from 'react-router-dom'
+
 import ErrorMessage from './ErrorMessage'
+import LoadingSpinner from './LoadingSpinner'
 import PokemonPage from './PokemonPage'
 import PokemonList from './PokemonList'
+
+import { useApi } from './useApi'
 
 const mapResults = (({ results }) => results.map(({ url, name }) => ({
   url,

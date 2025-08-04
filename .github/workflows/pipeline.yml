@@ -38,7 +38,7 @@ jobs:
           path: playwright-report/
           retention-days: 30
       - name: Trigger deployment
-        if: ${{ github.event_name == 'push' && env.SKIP_IN_COMMIT_MESSAGES != 'true' }}
+        if: ${{ github.event_name == 'push' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
       - name: Notify Discord about successful deployment
         uses: tsickert/discord-webhook@b217a69502f52803de774ded2b1ab7c282e99645
