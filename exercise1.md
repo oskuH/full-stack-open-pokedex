@@ -1,0 +1,7 @@
+Let us assume that the application is coded in Python. 
+
+Ruff is a promising modern linter that also functions as a formatter outside CI. It apparently lacks some of the more specific features provided by other linters, but for a 6-developer project it would probably suffice. pytest is the tried and tested solution for testing. Build step is not needed for Python.
+
+There are so many CI platforms besides Jenkins and GitHub Actions that it's not feasible to list them all here. From the bigger players, GitLab has GitLab CI/CD, Microsoft has Azure DevOps, and Google has Google Cloud Build. Some examples of names that also keep appearing in discussions are CircleCI, TeamCity, and Travis CI. However, GitHub Actions seems to have a lot of momentum right now and is a very good choice for a small team like this. 
+
+To choose between self-hosted and cloud-based environments, the context around this team needs to be taken into account. If this team is employed by a large company, the infrastructure might already be in place for self-hosting. Moreover, self-hosting would facilitate later expansion of the application. If, on the other hand, the team is independent or employed by a smaller company, cloud-based setup is most likely the better choice. Without knowing anything about this team of 6 people, I'd assume this will be the case. Using a cloud-based setup is further supported by the fact that the application is still in its early days and probably does not need advanced CI capabilities. 
